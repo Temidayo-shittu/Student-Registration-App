@@ -1,14 +1,13 @@
 const { Router } = require("express");
 
 const { getAdmin } = require("../controllers/admin/getAdmin");
-const { updateAdmin } = require("../controllers/admin/updateAdmin");
-const { updateAdminPassowrd } = require("../controllers/admin/updateAdminPassword");
-const { authenticateUser, authorizeRoles }= require('../middleware/full-auth')
+const { updateAdmin, updateAdminPassowrd } = require("../controllers/admin/updateAdmin");
+const { authenticateUser, authorizePermissions }= require('../middleware/authentication');
 
 const adminRouter = Router();
 
 // Admin level routes
-adminRouter.route("/").get(authenticateUser, getAdmin);
+adminRouter.route("/").get([authenticateUser, authorizePermissions('admin','super-admin')], getAdmin);
 adminRouter.route("/updateAdmin").patch(authenticateUser, updateAdmin);
 adminRouter.route("/updateAdminPassword").patch(authenticateUser, updateAdminPassowrd);
 

@@ -42,9 +42,10 @@ app.use(cookieParser(process.env.JWT_SECRET))
 
 // Load API routes
 app.get("/", (req, res) => res.send("API is up and running"));
-app.get("/api/v1", (req, res) =>
-    res.send("Student-Registration Portal API V1, [Health check::: API up and running]"),
-);
+app.get("/api/v1", (req, res) => {
+    console.log(req.signedCookies)
+    res.send("Student-Registration Portal API V1, [Health check::: API up and running]")
+})
 
 app.use(`${config.api.prefix}/auth`, authRouter)
 app.use(`${config.api.prefix}/admin`, adminRouter)

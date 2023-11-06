@@ -7,7 +7,7 @@ const deleteAdmin = async(req,res)=>{
     const admin = await Admin.findOne({_id:adminId})
     if(!admin) throw new CustomError.NotFoundError(`Admin with the given ID: ${adminId} not found`)
     await admin.remove()
-    res.status(StatusCodes.OK).json({msg:'Admin has been Succesfully Deleted!!'})
+    res.status(StatusCodes.OK).json({message:'Admin has been Succesfully Deleted!!'})
 }
 
 module.exports = { deleteAdmin };

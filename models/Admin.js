@@ -2,11 +2,12 @@ const mongoose= require('mongoose')
 const validator= require('validator')
 const bcrypt= require('bcryptjs')
 
-const AdminSchema= new mongoose.Schema({
+const AdminSchema= new mongoose.Schema(
+    {
     fullname:{
         type:String,
         required:[true, 'Please provide your full-name'],
-        minlength:8,
+        minlength:5,
         maxlength:50
     },
     email:{
@@ -27,7 +28,10 @@ const AdminSchema= new mongoose.Schema({
         type:String,
         enum:['admin','super-admin'],
         default:'admin'
-    }
+    },
+},
+{
+    timestamps: true
 })
 
 AdminSchema.pre('save',async function(){

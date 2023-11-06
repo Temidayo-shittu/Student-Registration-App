@@ -5,7 +5,7 @@ const CustomError = require('../../errors');
 const{attachCookiesToResponse, createTokenUser}= require('../../utils')
 
 const adminLogout = async(req,res)=>{
-    res.cookie('token', logout, {
+    res.cookie('token', adminLogout, {
         httpOnly: true,
         expires: new Date(Date.now())
     })
