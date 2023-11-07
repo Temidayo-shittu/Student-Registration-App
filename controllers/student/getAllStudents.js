@@ -56,6 +56,20 @@ const getAllStudents = async(req,res)=>{
 			});
 		}
 
+        // Optional: Filter by state of residence
+		if (req.query.state) {
+			pipeline.unshift({
+				$match: { state: req.query.state },
+			});
+		}
+
+        // Optional: Filter by age
+		if (req.query.age) {
+			pipeline.unshift({
+				$match: { age: req.query.age },
+			});
+		}
+
 		res.status(StatusCodes.OK).json({
 			status: "success",
 			data: students,
