@@ -5,7 +5,8 @@ const CustomError = require('../../errors');
 const{ attachCookiesToResponse, createTokenUser, createJWT, checkPermissions }= require('../../utils')
 
 const updateAdmin = async(req,res)=>{
-    const { fullname, email }= req.body
+    const { fullname, email } = req.body
+    try {
     if(!fullname || !email) throw new CustomError.BadRequestError('please provide full-name and email')
     const admin = await Admin.findOne({_id:req.user.userId})
     if(!admin) throw new CustomError.UnauthenticatedError('Invalid Authentication')
@@ -21,10 +22,20 @@ const updateAdmin = async(req,res)=>{
         message: `Successfully Updated Admin Details`,
         admin: tokenUser 
     })
+    } catch (err) {
+        console.log("INTERNAL_SERVER_ERROR:", err.message);
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            status: "fail",
+            message: "Internal server error",
+            error: err.message,
+        });
+    }
+    
 }
 
 const updateAdminPassowrd = async(req,res)=>{
     const { oldPassword, newPassword } = req.body
+    try {
     if(!oldPassword || !newPassword) throw new CustomError.BadRequestError('please provide both passwords')
     const admin = await Admin.findOne({_id:req.user.userId})
     if(!admin) throw new CustomError.UnauthenticatedError(`Admin with the given ID: ${req.user.userId} not found`)
@@ -35,6 +46,15 @@ const updateAdminPassowrd = async(req,res)=>{
     admin.password= newPassword
     await admin.save()
     res.status(StatusCodes.OK).json({message:"Successfully Updated Admin Passowrd!!"})
+    } catch (err) {
+        console.log("INTERNAL_SERVER_ERROR:", err.message);
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            status: "fail",
+            message: "Internal server error",
+            error: err.message,
+        });
+    }
+    
 }
 
 module.exports = { updateAdmin, updateAdminPassowrd };

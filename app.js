@@ -21,6 +21,7 @@ const connectDB=  require('./db/connect')
 const { authRouter } = require("./routes/authRoutes");
 const { adminRouter } = require("./routes/adminRoutes");
 const { superAdminRouter } = require("./routes/superAdminRoutes");
+const { studentRouter } = require("./routes/studentRoutes");
 
 //Middleware
 const notFoundMiddleware= require('./middleware/not-found')
@@ -50,6 +51,7 @@ app.get("/api/v1", (req, res) => {
 app.use(`${config.api.prefix}/auth`, authRouter)
 app.use(`${config.api.prefix}/admin`, adminRouter)
 app.use(`${config.api.prefix}/super-admin`, superAdminRouter)
+app.use(`${config.api.prefix}/student`, studentRouter)
 
 
 app.use(notFoundMiddleware)

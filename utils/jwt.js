@@ -6,7 +6,7 @@ const createJWT = (user)=>{
 }
 
 const attachCookiesToResponse = (res,user)=>{
-    const token= createJWT({user});
+    const token= createJWT(user);
     const oneDay= 1000 * 60 * 60 * 24 ;
     res.cookie('token', token, {
         httpOnly: true,

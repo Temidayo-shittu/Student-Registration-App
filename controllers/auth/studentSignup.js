@@ -2,7 +2,7 @@ const Student = require('../../models/Student');
 const jwt = require('jsonwebtoken');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
-const { attachCookiesToResponse, createJWT, createTokenStudent }= require('../../utils')
+const { attachCookiesToResponse, createJWT, createTokenStudent, studentAge }= require('../../utils')
 
 const studentSignup = async(req,res)=>{
     const { firstname, lastname, email, password, dateOfBirth } = req.body
@@ -14,15 +14,7 @@ const studentSignup = async(req,res)=>{
 		});
 
     student.fullname  = `${firstname} ${lastname}`
-    const today = new Date();
-    const birthDate = new Date(dateOfBirth);
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDiff = today.getMonth() - birthDate.getMonth();
-
-    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-    }
-    student.age = age;
+    student.age = studentAge(student.dateOfBirth);
 
 	await student.save();
     const tokenUser = createTokenStudent(student)

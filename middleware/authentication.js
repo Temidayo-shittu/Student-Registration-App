@@ -3,6 +3,7 @@ const {isTokenValid} = require('../utils')
 
 const authenticateUser = async(req,res,next)=>{
     const token = req.signedCookies.token
+    console.log("token", token);
     if(!token) throw new CustomError.UnauthenticatedError('Invalid Credentials')
     try {
         const { fullname, userId, role } = isTokenValid(token)
