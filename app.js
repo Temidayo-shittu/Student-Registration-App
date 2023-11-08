@@ -1,31 +1,36 @@
 require('dotenv').config()
 require('express-async-errors')
 //express
-const express= require('express')
-const app= express()
+const express = require('express')
+const app = express()
 const { config } = require("./config/global.config");
 
+
 //Rest of packages
-const morgan= require('morgan')
-const cookieParser= require('cookie-parser')
-const rateLimiter= require('express-rate-limit')
-const helmet= require('helmet')
-const xss= require('xss-clean')
-const cors= require('cors')
-const mongoSanitize= require('express-mongo-sanitize')
+const morgan = require('morgan')
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
+const multer = require('multer')
+const rateLimiter = require('express-rate-limit')
+const helmet = require('helmet')
+const xss = require('xss-clean')
+const cors = require('cors')
+const mongoSanitize = require('express-mongo-sanitize')
 
 //Database
-const connectDB=  require('./db/connect')
+const connectDB =  require('./db/connect')
 
 //Routes
 const { authRouter } = require("./routes/authRoutes");
 const { adminRouter } = require("./routes/adminRoutes");
 const { superAdminRouter } = require("./routes/superAdminRoutes");
 const { studentRouter } = require("./routes/studentRoutes");
+const { studentPhotoRouter } = require("./routes/studentPhotoRoutes");
 
 //Middleware
 const notFoundMiddleware= require('./middleware/not-found')
 const errorHandlerMiddleware= require('./middleware/error-handler')
+
 
 app.use(morgan('tiny'))
 app.set('trust proxy',1)
@@ -52,6 +57,7 @@ app.use(`${config.api.prefix}/auth`, authRouter)
 app.use(`${config.api.prefix}/admin`, adminRouter)
 app.use(`${config.api.prefix}/super-admin`, superAdminRouter)
 app.use(`${config.api.prefix}/student`, studentRouter)
+app.use(`${config.api.prefix}/images`, studentPhotoRouter)
 
 
 app.use(notFoundMiddleware)
@@ -63,7 +69,7 @@ const start= async()=>{
     try {
         await connectDB(process.env.MONGO_URL)
         app.listen(port, console.log(`Listening on port ${port}`))
-    } catch (error) {
+    } catch (error) {app.listen(port, console.log(`Listening on port ${port}`))
         console.log(error)
     }
 }
