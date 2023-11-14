@@ -8,7 +8,7 @@
 
 ## User Story
 
-- As a student, I should be able to register all my details and retrieve information concerning myself. 
+- As a student, I should be able to register or signup and retrieve information concerning myself. 
 - Students can register or login to their account and are able to view the contents of their details. 
 - Only registered students can upload their images which will be stored in the cloud and can be accessed by themselves and admin.
 - Students can only access their details peculiar to themselves as they wont be able to access information concerning other students.
@@ -28,8 +28,8 @@
 
 
 ### Postman Link:
-https://documenter.getpostman.com/view/26636754/2s93kz6RAP
+https://elements.getpostman.com/redirect?entityId=26636754-1a805b8c-845a-4776-a9fd-1ca256404349&entityType=collection
 
-### Render Link:
+### Server Link:
 https://moviestore-app.onrender.com
 
