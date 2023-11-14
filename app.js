@@ -64,7 +64,10 @@ app.use(cookieParser(process.env.JWT_SECRET))
 app.get("/", (req, res) => res.send("API is up and running"));
 app.get("/api/v1", (req, res) => {
     console.log(req.signedCookies)
-    res.send("Student-Registration Portal API V1, [Health check::: API up and running]")
+    res.json({
+        message:"Student-Registration Portal API V1, [Health check::: API up and running]",
+        postmanLink: "https://elements.getpostman.com/redirect?entityId=26636754-1a805b8c-845a-4776-a9fd-1ca256404349&entityType=collection"
+    })
 })
 
 app.use(`${config.api.prefix}/auth`, authRouter)

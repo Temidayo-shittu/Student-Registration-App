@@ -1,6 +1,6 @@
 ## Hosted Project
 
-[Student-Registration App Render URL](https://moviestore-app.onrender.com)
+[Student-Registration App Cyclic URL](https://amethyst-coypu-gown.cyclic.app)
 
 #### Setup Basic Express Server
 
@@ -31,5 +31,5 @@
 https://elements.getpostman.com/redirect?entityId=26636754-1a805b8c-845a-4776-a9fd-1ca256404349&entityType=collection
 
 ### Server Link:
-https://moviestore-app.onrender.com
+https://amethyst-coypu-gown.cyclic.app
 
