@@ -1,7 +1,5 @@
-/*
-const fileUpload = require('express-fileupload')
 const mongoose= require('mongoose')
-const validator= require('validator')
+
 
 const StudentPhotoSchema= new mongoose.Schema(
     {
@@ -9,9 +7,17 @@ const StudentPhotoSchema= new mongoose.Schema(
         type: mongoose.Schema.ObjectId,
         ref:'Student',
     },
-    myFile: {
-        type: fileUpload,
-    },
+    images: [
+			{
+				public_id: {
+					type: String,
+				},
+				url: {
+					type: String,
+				},
+                _id: false
+			},
+		],
 },
 {
     timestamps: true
@@ -20,7 +26,7 @@ const StudentPhotoSchema= new mongoose.Schema(
 
 module.exports= mongoose.model('StudentPhoto', StudentPhotoSchema)
 
-*/
+
 
 
 

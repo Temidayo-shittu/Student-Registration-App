@@ -3,6 +3,18 @@ require('express-async-errors')
 //express
 const express = require('express')
 const app = express()
+
+const fileUpload = require('express-fileupload')
+
+//USE V2 FOR CLOUDINARY
+const cloudinary = require('cloudinary').v2
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+})
+
 const { config } = require("./config/global.config");
 
 
@@ -26,6 +38,7 @@ const { adminRouter } = require("./routes/adminRoutes");
 const { superAdminRouter } = require("./routes/superAdminRoutes");
 const { studentRouter } = require("./routes/studentRoutes");
 const { studentPhotoRouter } = require("./routes/studentPhotoRoutes");
+const { analyticsRouter } = require("./routes/analyticsRoutes");
 
 //Middleware
 const notFoundMiddleware= require('./middleware/not-found')
@@ -44,6 +57,7 @@ app.use(xss())
 app.use(mongoSanitize())
 
 app.use(express.json())
+app.use(fileUpload({ useTempFiles: true }))
 app.use(cookieParser(process.env.JWT_SECRET))
 
 // Load API routes
@@ -58,14 +72,15 @@ app.use(`${config.api.prefix}/admin`, adminRouter)
 app.use(`${config.api.prefix}/super-admin`, superAdminRouter)
 app.use(`${config.api.prefix}/student`, studentRouter)
 app.use(`${config.api.prefix}/images`, studentPhotoRouter)
+app.use(`${config.api.prefix}/analytics`, analyticsRouter)
 
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
 
-const port= process.env.PORT || 5000
+const port = process.env.PORT || 5000
 
-const start= async()=>{
+const start = async()=>{
     try {
         await connectDB(process.env.MONGO_URL)
         app.listen(port, console.log(`Listening on port ${port}`))

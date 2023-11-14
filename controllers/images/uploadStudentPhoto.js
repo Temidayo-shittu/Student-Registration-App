@@ -1,55 +1,60 @@
-const processFile = require('../../middleware/upload');
-const { format } = require('util');
-const { Storage } = require('@google-cloud/storage');
+const StudentPhoto = require('../../models/StudentPhoto');
+const Student = require('../../models/Student');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
-// Instantiate a storage client with credentials
-const storage = new Storage({ keyFilename: 'google-cloud-key.json' });
-const bucket = storage.bucket('Profile Photo Upload');
+const cloudinary = require("cloudinary");
+const { uploader } = cloudinary.v2;
+const fileUpload = require('express-fileupload')
+const fs = require('fs')
 
 const uploadStudentPhoto = async(req,res)=>{
 
     try {
-        await processFile(req, res);
-    
-        if (!req.file) {
-          return res.status(StatusCodes.BAD_REQUEST).send({ message: "Please upload a file!" });
-        }
-    
-        // Create a new blob in the bucket and upload the file data.
-        const blob = bucket.file(req.file.originalname);
-        const blobStream = blob.createWriteStream({
-          resumable: false,
+      const imagesLinks = [];
+      console.log(req.files.file)
+
+      if (!req.files.file) throw new CustomError.BadRequestError(`Please at least one student image is required!`); 
+  
+      // Single upload
+      if (req.files.file) {
+        const singleUploadedData = await uploader.upload(req.files.file.tempFilePath, {
+          folder: "student-images",
         });
-    
-        blobStream.on("error", (err) => {
-          res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({ message: err.message });
+        imagesLinks.push({
+          public_id: singleUploadedData.public_id,
+          url: singleUploadedData.secure_url,
         });
-    
-        blobStream.on("finish", async (data) => {
-          // Create URL for directly file access via HTTP.
-          const publicUrl = format(
-            `https://storage.googleapis.com/${bucket.name}/${blob.name}`
-          );
-    
-          try {
-            // Make the file public
-            await bucket.file(req.file.originalname).makePublic();
-          } catch {
-            return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send({
-              message:
-                `Uploaded the file successfully: ${req.file.originalname}, but public access is denied!`,
-              url: publicUrl,
-            });
-          }
-    
-          res.status(StatusCodes.OK).send({
-            message: "Uploaded the file successfully: " + req.file.originalname,
-            url: publicUrl,
+      }
+      // Multiple upload
+      if (req.files.files) {
+        for (let i = 0; i < req.files.files.length; i++) {
+          let filePath = req.files.files[i].tempFilePath;
+          const uploadedData = await uploader.upload(filePath, {
+            folder: "student-images",
           });
-        });
-    
-        blobStream.end(req.file.buffer);
+  
+          imagesLinks.push({
+            public_id: uploadedData.public_id,
+            url: uploadedData.secure_url,
+          });
+        }
+      }
+
+      const student = await Student.findOne({_id:req.user.userId});
+      if(!student) throw new CustomError.NotFoundError(`Student with the given ID: ${req.user.userId} not found`);
+
+      req.body.images = imagesLinks;
+		  req.body.student = student._id;
+
+      const studentPhoto = await StudentPhoto.create(req.body);
+
+      fs.unlinkSync(req.files.file.tempFilePath)
+
+		res.status(StatusCodes.CREATED).json({
+			status: "success",
+			message: "Successfully Uploaded Student Photo",
+      studentPhoto
+		});
 
 } catch (err) {
     console.log("INTERNAL_SERVER_ERROR:", err.message);

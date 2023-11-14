@@ -1,4 +1,35 @@
 ## Hosted Project
 
-[Student-Registration App Render URL](https://e-commerce-api-10.herokuapp.com/)
+[Student-Registration App Render URL](https://moviestore-app.onrender.com)
+
+#### Setup Basic Express Server
+
+# Student Registration App Schema Design
+
+## User Story
+
+- As a student, I should be able to register all my details and retrieve information concerning myself. 
+- Students can register or login to their account and are able to view the contents of their details. 
+- Only registered students can upload their images which will be stored in the cloud and can be accessed by themselves and admin.
+- Students can only access their details peculiar to themselves as they wont be able to access information concerning other students.
+- Admins and super-admin can sign up and login to their accounts.
+- Only Admins can get information about all students and other sensitive statistics concerning the students.
+- Only super-admin can delete an admin or students profile. 
+
+## Requirement Analysis
+
+### Entities:
+
+- Authentication: This allows for registering and enabling students,admin,super-admin login to their account and also logging out
+- Student: A has a unique identifier, fullname, email, password, faculty, department amongst other features.
+- StudentPhoto: This contains profile pictures of students and only valid students can upload their images.
+- Admin: An admin or super-admin has a unique identifier, name, email, password and role.
+- Analytics: This provides statistical data for analytics on the mobile app.
+
+
+### Postman Link:
+https://documenter.getpostman.com/view/26636754/2s93kz6RAP
+
+### Render Link:
+https://moviestore-app.onrender.com
 

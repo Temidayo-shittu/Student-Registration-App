@@ -1,24 +1,24 @@
-const processFile = require('../../middleware/upload');
-const { format } = require('util');
-const { Storage } = require('@google-cloud/storage');
+const StudentPhoto = require('../../models/StudentPhoto');
+const Student = require('../../models/Student');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
-// Instantiate a storage client with credentials
-const storage = new Storage({ keyFilename: 'google-cloud-key.json' });
-const bucket = storage.bucket('Profile Photo Upload');
+const cloudinary = require("cloudinary");
+const { uploader } = cloudinary.v2;
+const{ attachCookiesToResponse, createTokenUser, createJWT, checkPermissions } = require('../../utils')
 
-const getSinglePhoto = async (req, res) => {
-    try {
-      const [metaData] = await bucket.file(req.params.name).getMetadata();
-      res.redirect(metaData.mediaLink);
-      
-    } catch (err) {
-        console.log("INTERNAL_SERVER_ERROR:", err.message);
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-            status: "fail",
-            message: "Could not download the file. " + err,
-        });
-    }
+const getSingleStudentPhoto = async(req,res)=>{
+    const { id:studentPhotoId } = req.params;
+    const studentPhoto = await StudentPhoto.findOne({ _id:studentPhotoId }).populate({path:'student', select:'fullname faculty department matric_number'})
+    if(!studentPhoto) throw new CustomError.NotFoundError(`StudentPhoto with the given ID: ${studentPhotoId} not found`);
+    console.log(req.user, studentPhoto.student._id)
+    checkPermissions(req.user, studentPhoto.student._id);
+    res.status(StatusCodes.OK).json({studentPhoto, count:studentPhoto.length});  
 };
 
-module.exports = { getSinglePhoto };
+const showCurrentStudentPhoto = async(req,res)=>{
+    const studentPhoto = await StudentPhoto.findOne({ student:req.user.userId }).populate({path:'student', select:'fullname faculty department matric_number'})
+    if(!studentPhoto) throw new CustomError.NotFoundError(`Student with the given ID: ${req.user.userId} not found`);
+    res.status(StatusCodes.OK).json({ studentPhoto })
+}
+
+module.exports = { getSingleStudentPhoto, showCurrentStudentPhoto };
