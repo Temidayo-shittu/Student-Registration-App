@@ -2,7 +2,7 @@ const Student = require('../../models/Student');
 const jwt = require('jsonwebtoken');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
-const { attachCookiesToResponse, createJWT, createTokenStudent, studentAge }= require('../../utils')
+const { attachCookiesToResponse, createJWT, createTokenStudent, studentAge } = require('../../utils')
 
 const studentSignup = async(req,res)=>{
     const { firstname, lastname, email, password, dateOfBirth } = req.body

@@ -15,6 +15,7 @@
 - Admins and super-admin can sign up and login to their accounts.
 - Only Admins can get information about all students and other sensitive statistics concerning the students.
 - Only super-admin can delete an admin or students profile. 
+- I created a checkPermissions function which limits the access of students' resources by anyone except the owner of the resource or admin/super-admin.
 
 ## Requirement Analysis
 
