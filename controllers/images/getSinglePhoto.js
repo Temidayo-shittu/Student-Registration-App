@@ -4,7 +4,7 @@ const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
 const cloudinary = require("cloudinary");
 const { uploader } = cloudinary.v2;
-const{ attachCookiesToResponse, createTokenUser, createJWT, checkPermissions } = require('../../utils')
+const{ attachCookiesToResponse, createTokenUser, createJWT, checkPermissions } = require('../../utils');
 
 const getSingleStudentPhoto = async(req,res)=>{
     const { id:studentPhotoId } = req.params;

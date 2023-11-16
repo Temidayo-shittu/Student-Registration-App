@@ -11,7 +11,7 @@
 - As a student, I should be able to register or signup and retrieve information concerning myself. 
 - Students can register or login to their account and are able to view the contents of their details. 
 - Only registered students can upload their images which will be stored in the cloud and can be accessed by themselves and admin.
-- Students can only access their details peculiar to themselves as they wont be able to access information concerning other students.
+- Students can only access information pertaining to themselves as they wont be able to access information concerning other students.
 - Admins and super-admin can sign up and login to their accounts.
 - Only Admins can get information about all students and other sensitive statistics concerning the students.
 - Only super-admin can delete an admin or students profile. 
@@ -22,7 +22,7 @@
 ### Entities:
 
 - Authentication: This allows for registering and enabling students,admin,super-admin login to their account and also logging out
-- Student: A has a unique identifier, fullname, email, password, faculty, department amongst other features.
+- Student: A student has a unique identifier, fullname, email, password, faculty, department amongst other features.
 - StudentPhoto: This contains profile pictures of students and only valid students can upload their images.
 - Admin: An admin or super-admin has a unique identifier, name, email, password and role.
 - Analytics: This provides statistical data for analytics on the mobile app.
