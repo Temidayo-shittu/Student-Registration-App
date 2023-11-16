@@ -2,7 +2,7 @@ const Student = require('../../models/Student');
 const jwt = require('jsonwebtoken');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
-const { attachCookiesToResponse, createJWT, createTokenStudent, studentAge } = require('../../utils')
+const { createJWT, createTokenStudent, studentAge } = require('../../utils');
 
 const studentSignup = async(req,res)=>{
     const { firstname, lastname, email, password, dateOfBirth } = req.body
@@ -21,7 +21,6 @@ const studentSignup = async(req,res)=>{
     console.log(tokenUser)
     const token = createJWT(tokenUser)
     console.log(token)
-    attachCookiesToResponse(res, tokenUser)
     
     res.status(StatusCodes.CREATED).json({ 
         message: `Successfully Registered ${student.fullname} from ${student.department} Department!!`,

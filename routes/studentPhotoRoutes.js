@@ -4,12 +4,12 @@ const { uploadStudentPhoto } = require("../controllers/images/uploadStudentPhoto
 const { getAllPhotos } = require("../controllers/images/getAllPhotos");
 const { getSingleStudentPhoto, showCurrentStudentPhoto } = require("../controllers/images/getSinglePhoto");
 
-const { authenticateUser, authorizePermissions } = require('../middleware/authentication');
+const { authenticateUser, authorizeRoles } = require('../middleware/full-auth');
 
 const studentPhotoRouter = Router();
 
 // Admin level routes
-studentPhotoRouter.route("/all-images").get([authenticateUser, authorizePermissions('admin','super-admin')], getAllPhotos);
+studentPhotoRouter.route("/all-images").get([authenticateUser, authorizeRoles('admin','super-admin')], getAllPhotos);
 
 
 // Student level routes

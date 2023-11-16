@@ -16,7 +16,7 @@ const updateAdmin = async(req,res)=>{
     admin.email = email
     await admin.save()
     const tokenUser = createTokenUser(admin)
-    attachCookiesToResponse(res, tokenUser)
+    //attachCookiesToResponse(res, tokenUser)
    
     res.status(StatusCodes.OK).json({ 
         message: `Successfully Updated Admin Details`,

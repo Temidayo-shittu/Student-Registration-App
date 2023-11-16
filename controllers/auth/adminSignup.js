@@ -2,7 +2,7 @@ const Admin = require('../../models/Admin');
 const jwt = require('jsonwebtoken');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
-const { attachCookiesToResponse, createJWT, createTokenUser }= require('../../utils')
+const { createJWT, createTokenUser }= require('../../utils');
 
 const adminSignup = async(req,res)=>{
     const { fullname, email, password, role } = req.body
@@ -14,7 +14,6 @@ const adminSignup = async(req,res)=>{
     console.log(tokenUser)
     const token = createJWT(tokenUser)
     console.log(token)
-    attachCookiesToResponse(res, tokenUser)
     
     res.status(StatusCodes.CREATED).json({ 
         message: `Successfully Registered ${admin.fullname} as ${admin.role}`,

@@ -2,7 +2,7 @@ const Student = require('../../models/Student');
 const jwt = require('jsonwebtoken');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
-const{ attachCookiesToResponse, createTokenStudent, createJWT, checkPermissions, studentAge }= require('../../utils')
+const{ createTokenStudent, createJWT, checkPermissions, studentAge }= require('../../utils')
 
 const updateStudent = async(req,res)=>{
     const student = await Student.findById(req.params.id).select('-password');
@@ -19,13 +19,12 @@ const updateStudent = async(req,res)=>{
     updatedStudent.age = studentAge(updatedStudent.dateOfBirth);
 	await updatedStudent.save();
     
-    const tokenUser = createTokenStudent(updatedStudent)
-    attachCookiesToResponse(res, tokenUser)
+    const tokenUser = createTokenStudent(updatedStudent);
    
     res.status(StatusCodes.OK).json({ 
         message: `Successfully Updated Student Details`,
         updatedStudent: tokenUser
-    })
+    });
 
 } catch (err) {
     console.log("INTERNAL_SERVER_ERROR:", err.message);

@@ -58,7 +58,7 @@ app.use(mongoSanitize())
 
 app.use(express.json())
 app.use(fileUpload({ useTempFiles: true }))
-app.use(cookieParser(process.env.JWT_SECRET))
+//app.use(cookieParser(process.env.JWT_SECRET))
 
 // Load API routes
 app.get("/", (req, res) => res.send("API is up and running"));

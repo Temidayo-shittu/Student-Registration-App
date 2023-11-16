@@ -2,7 +2,7 @@ const Student = require('../../models/Student');
 const jwt = require('jsonwebtoken');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
-const { attachCookiesToResponse, createJWT, createTokenStudent } = require('../../utils');
+const { createJWT, createTokenStudent } = require('../../utils');
 
 const studentLogin = async(req,res)=>{
     const { email, password } = req.body
@@ -14,7 +14,6 @@ const studentLogin = async(req,res)=>{
 
     const tokenUser = createTokenStudent(student)
     const token = createJWT(tokenUser)
-    attachCookiesToResponse(res, tokenUser)
     
     res.status(StatusCodes.OK).json({ 
         message: `Successfully Logged In ${student.fullname}`,
