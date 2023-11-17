@@ -5,7 +5,7 @@ const CustomError = require('../../errors');
 const cloudinary = require("cloudinary");
 const { uploader } = cloudinary.v2;
 const fileUpload = require('express-fileupload');
-const fs = require('@cyclic.sh/s3fs');
+const fs = require('fs');
 
 const uploadStudentPhoto = async(req,res)=>{
 

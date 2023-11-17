@@ -59,7 +59,7 @@ app.use(mongoSanitize())
 app.use(express.json())
 app.use(fileUpload({ 
     useTempFiles: true,
-    tempFileDir: '/tmp', 
+    tempFileDir: "/tmp", 
 }))
 //app.use(cookieParser(process.env.JWT_SECRET))
 
