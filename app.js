@@ -57,7 +57,10 @@ app.use(xss())
 app.use(mongoSanitize())
 
 app.use(express.json())
-app.use(fileUpload({ useTempFiles: true }))
+app.use(fileUpload({ 
+    useTempFiles: true,
+    tempFileDir: '/tmp', 
+}))
 //app.use(cookieParser(process.env.JWT_SECRET))
 
 // Load API routes

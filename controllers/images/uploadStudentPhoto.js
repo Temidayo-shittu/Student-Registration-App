@@ -48,7 +48,7 @@ const uploadStudentPhoto = async(req,res)=>{
 
       const studentPhoto = await StudentPhoto.create(req.body);
 
-      //fs.unlinkSync(req.files.file.tempFilePath)
+      fs.unlinkSync(req.files.file.tempFilePath)
 
 		res.status(StatusCodes.CREATED).json({
 			status: "success",
