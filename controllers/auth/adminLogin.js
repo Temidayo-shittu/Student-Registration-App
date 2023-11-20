@@ -2,7 +2,7 @@ const Admin = require('../../models/Admin');
 const jwt = require('jsonwebtoken');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
-const{ createTokenUser, createJWT }= require('../../utils');
+const{ createTokenUser, createJWT } = require('../../utils');
 
 const adminLogin = async(req,res)=>{
     const { email, password } = req.body

@@ -1,7 +1,7 @@
 const BlacklistedToken = require('../../models/BlacklistedToken');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
-const { isTokenValid } = require('../utils/jwt');
+const { isTokenValid } = require('../../utils');
 
 const studentLogout = async(req,res)=>{
     let token;
