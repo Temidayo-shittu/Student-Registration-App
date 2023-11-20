@@ -16,6 +16,7 @@
 - Only Admins can get information about all students and other sensitive statistics concerning the students.
 - Only super-admin can delete an admin or students profile. 
 - I created a checkPermissions function which limits the access of students' resources by anyone except the owner of the resource or admin/super-admin.
+- Once a student, admin/super-admin is logged out, their tokens gets saved in the Blacklisted Tokens which prevents them from accessing routes unless they are logged in again.
 
 ## Requirement Analysis
 
@@ -26,6 +27,7 @@
 - StudentPhoto: This contains profile pictures of students and only valid students can upload their images.
 - Admin: An admin or super-admin has a unique identifier, name, email, password and role.
 - Analytics: This provides statistical data for analytics on the mobile app.
+- BlackListed Token: This shows all the tokens of logged out students and admin.
 
 
 ### Postman Link:
