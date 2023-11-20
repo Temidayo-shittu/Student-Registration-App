@@ -17,7 +17,7 @@ const adminLogout = async(req,res)=>{
   // Attach the user and his permissions to the req object
   req.user = { fullname, userId, role }
 
-  const blacklistedToken = await BlacklistedToken.create(token);
+  const blacklistedToken = await BlacklistedToken.create({ token: token });
   res.status(StatusCodes.OK).json({ message: `Successfully Logged out ${req.user.fullname} as Admin` })
 }
 
