@@ -6,6 +6,7 @@ const { adminLogin } = require("../controllers/auth/adminLogin");
 const { studentLogin } = require("../controllers/auth/studentLogin");
 const { adminLogout } = require("../controllers/auth/adminLogout");
 const { studentLogout } = require("../controllers/auth/studentLogout");
+const { authenticateUser, authorizeRoles } = require('../middleware/full-auth');
 
 
 const authRouter = Router();
@@ -15,8 +16,8 @@ authRouter.route("/admin/signup").post(adminSignup);
 authRouter.route("/student/signup").post(studentSignup);
 authRouter.route("/admin/login").post(adminLogin);
 authRouter.route("/student/login").post(studentLogin);
-authRouter.route("/admin/logout").get(adminLogout);
-authRouter.route("/student/logout").get(studentLogout);
+authRouter.route("/admin/logout").get(authenticateUser, adminLogout);
+authRouter.route("/student/logout").get(authenticateUser, studentLogout);
 
 
 module.exports = { authRouter };

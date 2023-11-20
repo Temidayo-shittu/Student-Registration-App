@@ -2,7 +2,7 @@ const { Router } = require("express");
 
 const { getAdmin } = require("../controllers/admin/getAdmin");
 const { updateAdmin, updateAdminPassowrd } = require("../controllers/admin/updateAdmin");
-const { authenticateUser, authorizeRoles }= require('../middleware/full-auth');
+const { authenticateUser, authorizeRoles } = require('../middleware/full-auth');
 
 const adminRouter = Router();
 
