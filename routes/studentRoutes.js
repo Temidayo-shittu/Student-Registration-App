@@ -5,19 +5,19 @@ const { getAllMaleStudents } = require("../controllers/student/getAllMaleStudent
 const { getAllFemaleStudents } = require("../controllers/student/getAllFemaleStudents");
 const { getSingleStudent, showCurrentStudent } = require("../controllers/student/getSingleStudent");
 const { updateStudent, updateStudentPassowrd } = require("../controllers/student/updateStudent");
-const { authenticateUser, authorizeRoles }= require('../middleware/full-auth');
+const { authenticateUser, checkBlacklist, authorizeRoles }= require('../middleware/full-auth');
 
 const studentRouter = Router();
 
 // Admin level routes
-studentRouter.route("/fetch/all").get([authenticateUser, authorizeRoles('admin','super-admin')], getAllStudents);
-studentRouter.route("/fetch/all/male").get([authenticateUser, authorizeRoles('admin','super-admin')], getAllMaleStudents);
-studentRouter.route("/fetch/all/female").get([authenticateUser, authorizeRoles('admin','super-admin')], getAllFemaleStudents);
+studentRouter.route("/fetch/all").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], getAllStudents);
+studentRouter.route("/fetch/all/male").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], getAllMaleStudents);
+studentRouter.route("/fetch/all/female").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], getAllFemaleStudents);
 
 // Student level routes
-studentRouter.route("/:id").get(authenticateUser, getSingleStudent);
-studentRouter.route("/show/AllMyDetails").get(authenticateUser, showCurrentStudent);
-studentRouter.route("/:id").patch(authenticateUser, updateStudent);
-studentRouter.route("/update/StudentPassword").patch(authenticateUser, updateStudentPassowrd);
+studentRouter.route("/:id").get(authenticateUser, checkBlacklist, getSingleStudent);
+studentRouter.route("/show/AllMyDetails").get(authenticateUser, checkBlacklist, showCurrentStudent);
+studentRouter.route("/:id").patch(authenticateUser, checkBlacklist, updateStudent);
+studentRouter.route("/update/StudentPassword").patch(authenticateUser, checkBlacklist, updateStudentPassowrd);
 
 module.exports = { studentRouter };

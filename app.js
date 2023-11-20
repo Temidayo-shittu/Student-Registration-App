@@ -33,56 +33,62 @@ const mongoSanitize = require('express-mongo-sanitize')
 const connectDB =  require('./db/connect')
 
 //Routes
-const { authRouter } = require("./routes/authRoutes");
+const { analyticsRouter } = require("./routes/analyticsRoutes");
 const { adminRouter } = require("./routes/adminRoutes");
-const { superAdminRouter } = require("./routes/superAdminRoutes");
+const { authRouter } = require("./routes/authRoutes");
+const { blackListedTokenRouter } = require("./routes/blacklistedTokenRoutes");
 const { studentRouter } = require("./routes/studentRoutes");
 const { studentPhotoRouter } = require("./routes/studentPhotoRoutes");
-const { analyticsRouter } = require("./routes/analyticsRoutes");
+const { superAdminRouter } = require("./routes/superAdminRoutes");
+
 
 //Middleware
-const notFoundMiddleware= require('./middleware/not-found')
-const errorHandlerMiddleware= require('./middleware/error-handler')
+const notFoundMiddleware = require('./middleware/not-found');
+const errorHandlerMiddleware = require('./middleware/error-handler');
 
 
-app.use(morgan('tiny'))
-app.set('trust proxy',1)
+app.use(morgan('tiny'));
+app.set('trust proxy',1);
+
 app.use(rateLimiter({
     windowsMs: 15 * 60 * 1000,
     max:60
-}))
-app.use(helmet())
-app.use(cors())
-app.use(xss())
-app.use(mongoSanitize())
+}));
 
-app.use(express.json())
+app.use(helmet());
+app.use(cors());
+app.use(xss());
+app.use(mongoSanitize());
+
+app.use(express.json());
+
 app.use(fileUpload({ 
     useTempFiles: true,
     tempFileDir: "/tmp", 
-}))
-//app.use(cookieParser(process.env.JWT_SECRET))
+}));
+
 
 // Load API routes
 app.get("/", (req, res) => res.send("API is up and running"));
 app.get("/api/v1", (req, res) => {
-    console.log(req.signedCookies)
     res.json({
         message:"Student-Registration Portal API V1, [Health check::: API up and running]",
         postmanLink: "https://elements.getpostman.com/redirect?entityId=26636754-1a805b8c-845a-4776-a9fd-1ca256404349&entityType=collection"
     })
-})
-
-app.use(`${config.api.prefix}/auth`, authRouter)
-app.use(`${config.api.prefix}/admin`, adminRouter)
-app.use(`${config.api.prefix}/super-admin`, superAdminRouter)
-app.use(`${config.api.prefix}/student`, studentRouter)
-app.use(`${config.api.prefix}/images`, studentPhotoRouter)
-app.use(`${config.api.prefix}/analytics`, analyticsRouter)
+});
 
 
-app.use(notFoundMiddleware)
-app.use(errorHandlerMiddleware)
+app.use(`${config.api.prefix}/admin`, adminRouter);
+app.use(`${config.api.prefix}/analytics`, analyticsRouter);
+app.use(`${config.api.prefix}/auth`, authRouter);
+app.use(`${config.api.prefix}/blacklisted-token`, blackListedTokenRouter);
+app.use(`${config.api.prefix}/student`, studentRouter);
+app.use(`${config.api.prefix}/images`, studentPhotoRouter);
+app.use(`${config.api.prefix}/super-admin`, superAdminRouter);
+
+
+app.use(notFoundMiddleware);
+app.use(errorHandlerMiddleware);
 
 const port = process.env.PORT || 5000
 
@@ -94,4 +100,4 @@ const start = async()=>{
         console.log(error)
     }
 }
-start()
+start();

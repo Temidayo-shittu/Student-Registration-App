@@ -1,15 +1,24 @@
-const Student = require('../../models/Student');
-const jwt = require('jsonwebtoken');
+const BlacklistedToken = require('../../models/BlacklistedToken');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
-const { attachCookiesToResponse, createJWT, createTokenStudent }= require('../../utils');
+const { isTokenValid } = require('../utils/jwt');
 
 const studentLogout = async(req,res)=>{
-    res.cookie('token', studentLogout, {
-        httpOnly: true,
-        expires: new Date(Date.now())
-    })
-    res.status(StatusCodes.OK).json({message:"Successfully Logged out Student"})
+    let token;
+  // check header
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith('Bearer')) {
+    token = authHeader.split(' ')[1];
+  }
+  if (!token) {
+    throw new CustomError.UnauthenticatedError('Authentication invalid');
+  }
+  const { fullname, userId, role } = isTokenValid(token);
+  // Attach the user and his permissions to the req object
+  req.user = { fullname, userId, role }
+
+  const blacklistedToken = await BlacklistedToken.create(token);
+  res.status(StatusCodes.OK).json({ message: `Successfully Logged out ${req.user.fullname} as Student` })
 }
 
 module.exports = { studentLogout };

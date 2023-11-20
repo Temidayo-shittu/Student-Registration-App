@@ -1,15 +1,24 @@
-const Admin = require('../../models/Admin');
-const jwt = require('jsonwebtoken');
+const BlacklistedToken = require('../../models/BlacklistedToken');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
-const{ attachCookiesToResponse, createTokenUser }= require('../../utils')
+const { isTokenValid } = require('../utils/jwt');
 
 const adminLogout = async(req,res)=>{
-    res.cookie('token', adminLogout, {
-        httpOnly: true,
-        expires: new Date(Date.now())
-    })
-    res.status(StatusCodes.OK).json({ message:"Successfully Logged out Admin" })
+    let token;
+  // check header
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith('Bearer')) {
+    token = authHeader.split(' ')[1];
+  }
+  if (!token) {
+    throw new CustomError.UnauthenticatedError('Authentication invalid');
+  }
+  const { fullname, userId, role } = isTokenValid(token);
+  // Attach the user and his permissions to the req object
+  req.user = { fullname, userId, role }
+
+  const blacklistedToken = await BlacklistedToken.create(token);
+  res.status(StatusCodes.OK).json({ message: `Successfully Logged out ${req.user.fullname} as Admin` })
 }
 
 module.exports = { adminLogout };
