@@ -1,5 +1,5 @@
 const { StatusCodes } = require('http-status-codes');
-const BlacklistedToken = require('../../models/BlacklistedToken');
+const BlacklistedToken = require('../models/BlacklistedToken');
 const CustomError = require('../errors');
 const { isTokenValid } = require('../utils/jwt');
 

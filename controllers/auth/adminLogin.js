@@ -1,6 +1,6 @@
 const Admin = require('../../models/Admin');
 const jwt = require('jsonwebtoken');
-const {StatusCodes} = require('http-status-codes');
+const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
 const{ createTokenUser, createJWT }= require('../../utils');
 
