@@ -7,11 +7,11 @@ const { uploader } = cloudinary.v2;
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
 
-const uploadStudentPhoto = async(req,res)=>{
+const uploadStudentPhoto = async(req, res)=>{
 
     try {
       const imagesLinks = [];
-      console.log(req.files.file)
+      console.log(req.files.file);
 
       if (!req.files.file) throw new CustomError.BadRequestError(`Please at least one student image is required!`); 
   
@@ -25,6 +25,7 @@ const uploadStudentPhoto = async(req,res)=>{
           url: singleUploadedData.secure_url,
         });
       }
+
       // Multiple upload
       if (req.files.files) {
         for (let i = 0; i < req.files.files.length; i++) {
@@ -37,8 +38,8 @@ const uploadStudentPhoto = async(req,res)=>{
             public_id: uploadedData.public_id,
             url: uploadedData.secure_url,
           });
-        }
-      }
+        };
+      };
 
       const student = await Student.findOne({_id:req.user.userId});
       if(!student) throw new CustomError.NotFoundError(`Student with the given ID: ${req.user.userId} not found`);
@@ -48,7 +49,7 @@ const uploadStudentPhoto = async(req,res)=>{
 
       const studentPhoto = await StudentPhoto.create(req.body);
 
-      fs.unlinkSync(req.files.file.tempFilePath)
+      fs.unlinkSync(req.files.file.tempFilePath);
 
 		res.status(StatusCodes.CREATED).json({
 			status: "success",
@@ -63,7 +64,7 @@ const uploadStudentPhoto = async(req,res)=>{
         message: "Internal server error",
         error: err.message,
     });
-  }
-}
+  };
+};
 
 module.exports = { uploadStudentPhoto };

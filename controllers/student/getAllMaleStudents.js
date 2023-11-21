@@ -3,14 +3,14 @@ const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
 const{ ApiFeatures } = require('../../utils')
 
-const getAllMaleStudents = async(req,res)=>{
+const getAllMaleStudents = async(req, res)=>{
     const maleStudentCount = await Student.find({ gender:"male" }).countDocuments();
 	const resultPerPage = parseInt(req.query.limit) || maleStudentCount;
 	const page = parseInt(req.query.page) || 1;
 
 	try {
 		const apiFeature = new ApiFeatures(
-			Student.find({gender:"male"}).select('-password'),
+			Student.find({ gender:"male" }).select('-password'),
 			req.query,
 		)
 			.search()
@@ -39,7 +39,7 @@ const getAllMaleStudents = async(req,res)=>{
             message: "Internal server error",
             error: err.message,
         });
-      }
+      };
 };
 
 module.exports = { getAllMaleStudents };

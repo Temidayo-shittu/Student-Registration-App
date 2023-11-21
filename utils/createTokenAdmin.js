@@ -1,4 +1,4 @@
-const createTokenUser= (user)=>{
+const createTokenAdmin = (user)=>{
     return {
         userId: user._id,
         fullname: user.fullname,
@@ -7,4 +7,4 @@ const createTokenUser= (user)=>{
     }  
 }
 
-module.exports= createTokenUser
+module.exports = createTokenAdmin;

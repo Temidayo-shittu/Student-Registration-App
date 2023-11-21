@@ -4,29 +4,29 @@ const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
 const { createJWT, createTokenStudent, studentAge } = require('../../utils');
 
-const studentSignup = async(req,res)=>{
-    const { firstname, lastname, email, password, dateOfBirth } = req.body
-    const emailAlreadyExists= await Student.findOne({email})
-    if(emailAlreadyExists) throw new CustomError.BadRequestError('email already exists')
+const studentSignup = async(req, res)=>{
+    const { firstname, lastname, email, password, dateOfBirth } = req.body;
+    const emailAlreadyExists= await Student.findOne({ email });
+    if(emailAlreadyExists) throw new CustomError.BadRequestError('email already exists');
 
 	const student = new Student({
 			...req.body,
 		});
 
-    student.fullname  = `${firstname} ${lastname}`
+    student.fullname  = `${firstname} ${lastname}`;
     student.age = studentAge(student.dateOfBirth);
 
 	await student.save();
-    const tokenUser = createTokenStudent(student)
-    console.log(tokenUser)
-    const token = createJWT(tokenUser)
-    console.log(token)
+    const tokenUser = createTokenStudent(student);
+    console.log(tokenUser);
+    const token = createJWT(tokenUser);
+    console.log(token);
     
     res.status(StatusCodes.CREATED).json({ 
         message: `Successfully Registered ${student.fullname} from ${student.department} Department!!`,
         student: tokenUser,
         token 
-    })
-}
+    });
+};
 
 module.exports = { studentSignup };

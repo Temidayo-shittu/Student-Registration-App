@@ -25,7 +25,7 @@ const averageStudentsAge = async (req, res) => {
             message: "Internal server error",
             error: err.message,
         });
-      }
+      };
 };
 
 module.exports = { averageStudentsAge };

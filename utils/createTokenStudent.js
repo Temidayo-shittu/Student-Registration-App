@@ -20,4 +20,4 @@ const createTokenStudent = (user)=>{
     }  
 }
 
-module.exports= createTokenStudent
+module.exports= createTokenStudent;

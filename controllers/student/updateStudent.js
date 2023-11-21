@@ -4,7 +4,7 @@ const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
 const{ createTokenStudent, createJWT, checkPermissions, studentAge }= require('../../utils')
 
-const updateStudent = async(req,res)=>{
+const updateStudent = async(req, res)=>{
     const student = await Student.findById(req.params.id).select('-password');
     if(!student) throw new CustomError.NotFoundError(`Student with the given ID: ${req.params.id} not found`)
     checkPermissions(req.user, student._id)
@@ -38,20 +38,20 @@ const updateStudent = async(req,res)=>{
 
 
 
-const updateStudentPassowrd = async(req,res)=>{
-    const { oldPassword, newPassword } = req.body
-    if(!oldPassword || !newPassword) throw new CustomError.BadRequestError('please provide both passwords')
+const updateStudentPassowrd = async(req, res)=>{
+    const { oldPassword, newPassword } = req.body;
+    if(!oldPassword || !newPassword) throw new CustomError.BadRequestError('please provide both passwords');
     try {
-    const student = await Student.findOne({_id:req.user.userId})
-    console.log(req.user.userId)
-    if(!student) throw new CustomError.UnauthenticatedError(`Student with the given ID: ${req.user.userId} not found`)
-    checkPermissions(req.user, student._id)
-    console.log(req.user, student._id, req.user.role, student.role)
-    const isPasswordCorrect= await student.comparePassword(oldPassword)
-    if(!isPasswordCorrect) throw new CustomError.UnauthenticatedError('Invalid Authentication')
-    student.password= newPassword
-    await student.save()
-    res.status(StatusCodes.OK).json({message:"Successfully Updated Student Passowrd!!"})
+    const student = await Student.findOne({_id:req.user.userId});
+    console.log(req.user.userId);
+    if(!student) throw new CustomError.UnauthenticatedError(`Student with the given ID: ${req.user.userId} not found`);
+    checkPermissions(req.user, student._id);
+    console.log(req.user, student._id, req.user.role, student.role);
+    const isPasswordCorrect = await student.comparePassword(oldPassword);
+    if(!isPasswordCorrect) throw new CustomError.UnauthenticatedError('Invalid Authentication');
+    student.password = newPassword;
+    await student.save();
+    res.status(StatusCodes.OK).json({message:"Successfully Updated Student Passowrd!!"});
     } catch (err) {
         console.log("INTERNAL_SERVER_ERROR:", err.message);
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -59,7 +59,7 @@ const updateStudentPassowrd = async(req,res)=>{
             message: "Internal server error",
             error: err.message,
         });
-    }
+    };
     
 }
 

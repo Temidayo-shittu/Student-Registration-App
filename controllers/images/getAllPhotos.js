@@ -53,7 +53,7 @@ const getAllPhotos = async (req, res) => {
         message: "Unable to get list of photos!",
         error: err.message,
     });
-   }
+   };
 };
 
 module.exports = { getAllPhotos };

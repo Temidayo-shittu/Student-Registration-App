@@ -3,7 +3,7 @@ const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
 const { isTokenValid } = require('../../utils');
 
-const adminLogout = async(req,res)=>{
+const adminLogout = async(req, res)=>{
     let token;
   // check header
   const authHeader = req.headers.authorization;
@@ -15,10 +15,11 @@ const adminLogout = async(req,res)=>{
   }
   const { fullname, userId, role } = isTokenValid(token);
   // Attach the user and his permissions to the req object
-  req.user = { fullname, userId, role }
+  req.user = { fullname, userId, role };
 
   const blacklistedToken = await BlacklistedToken.create({ token: token });
-  res.status(StatusCodes.OK).json({ message: `Successfully Logged out ${req.user.fullname} as Admin` })
-}
+  res.status(StatusCodes.OK).json({ message: `Successfully Logged out ${req.user.fullname} as Admin` });
+
+};
 
 module.exports = { adminLogout };

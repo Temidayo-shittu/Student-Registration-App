@@ -1,4 +1,4 @@
-const CustomError= require('../errors')
+const CustomError = require('../errors');
 
 const studentAge = (birthYear)=>{
     const today = new Date();
@@ -12,6 +12,6 @@ const studentAge = (birthYear)=>{
     }
     return  age;
 
-}
+};
 
-module.exports = studentAge 
+module.exports = studentAge ;

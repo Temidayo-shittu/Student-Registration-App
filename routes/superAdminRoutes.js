@@ -3,7 +3,7 @@ const { Router } = require("express");
 const { getSuperAdmin } = require("../controllers/super-admin/getSuperAdmin");
 const { deleteAdmin } = require("../controllers/super-admin/deleteAdmin");
 const { deleteStudent } = require("../controllers/super-admin/deleteStudent");
-const { authenticateUser, checkBlacklist, authorizeRoles }= require('../middleware/full-auth')
+const { authenticateUser, checkBlacklist, authorizeRoles }= require('../middleware/full-auth');
 
 const superAdminRouter = Router();
 

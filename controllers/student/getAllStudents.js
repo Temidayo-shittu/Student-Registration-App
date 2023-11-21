@@ -85,7 +85,7 @@ const getAllStudents = async(req,res)=>{
             message: "Internal server error",
             error: err.message,
         });
-      }
+      };
 };
 
 module.exports = { getAllStudents };
