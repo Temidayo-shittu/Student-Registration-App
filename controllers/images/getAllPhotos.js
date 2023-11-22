@@ -12,7 +12,7 @@ const getAllPhotos = async (req, res) => {
 	const page = parseInt(req.query.page) || 1;
     try {
         const apiFeature = new ApiFeatures(
-			StudentPhoto.find({}).populate({path:'student', select:'fullname faculty department matric_number'}),
+			StudentPhoto.find({}).populate({path:'student', select:'fullname faculty department current_level matric_number'}),
 			req.query,
 		)
 			.search()

@@ -1,36 +1,26 @@
-require('dotenv').config()
-require('express-async-errors')
+require('dotenv').config();
+require('express-async-errors');
+
 //express
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
-const fileUpload = require('express-fileupload')
-
-//USE V2 FOR CLOUDINARY
-const cloudinary = require('cloudinary').v2
-
-cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
-})
-
+const fileUpload = require('express-fileupload');
+const { cloudinaryConfig } = require("./config/cloudinary.config");
 const { config } = require("./config/global.config");
 
-
 //Rest of packages
-const morgan = require('morgan')
-const cookieParser = require('cookie-parser')
-const bodyParser = require('body-parser')
-const multer = require('multer')
-const rateLimiter = require('express-rate-limit')
-const helmet = require('helmet')
-const xss = require('xss-clean')
-const cors = require('cors')
-const mongoSanitize = require('express-mongo-sanitize')
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const rateLimiter = require('express-rate-limit');
+const helmet = require('helmet');
+const xss = require('xss-clean');
+const cors = require('cors');
+const mongoSanitize = require('express-mongo-sanitize');
 
 //Database
-const connectDB =  require('./db/connect')
+const connectDB =  require('./db/connect');
 
 //Routes
 const { analyticsRouter } = require("./routes/analyticsRoutes");

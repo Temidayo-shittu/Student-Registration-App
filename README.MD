@@ -16,7 +16,7 @@
 - Only Admins can get information about all students and other sensitive statistics concerning the students.
 - Only super-admin can delete an admin or students profile. 
 - I created a checkPermissions function which limits the access of students' resources by anyone except the owner of the resource or admin/super-admin.
-- Once a student, admin/super-admin is logged out, their tokens gets saved in the Blacklisted Tokens which prevents them from accessing routes unless they are logged in again.
+- Once a student, admin/super-admin is logged out, their tokens gets saved in the Blacklisted Tokens which prevents them from accessing routes unless they are logged in again.reate
 
 ## Requirement Analysis
 
