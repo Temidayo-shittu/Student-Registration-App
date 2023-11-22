@@ -63,7 +63,7 @@ app.get("/", (req, res) => res.send("API is up and running"));
 app.get("/api/v1", (req, res) => {
     res.json({
         message:"Student-Registration Portal API V1, [Health check::: API up and running]",
-        postmanLink: "https://elements.getpostman.com/redirect?entityId=26636754-1a805b8c-845a-4776-a9fd-1ca256404349&entityType=collection"
+        postmanLink: "https://www.postman.com/galactic-resonance-793427/workspace/babban-gona-hackathon/collection/26636754-1a805b8c-845a-4776-a9fd-1ca256404349?action=share&creator=26636754"
     })
 });
 

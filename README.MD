@@ -31,7 +31,7 @@
 
 
 ### Postman Link:
-https://elements.getpostman.com/redirect?entityId=26636754-1a805b8c-845a-4776-a9fd-1ca256404349&entityType=collection
+https://www.postman.com/galactic-resonance-793427/workspace/babban-gona-hackathon/collection/26636754-1a805b8c-845a-4776-a9fd-1ca256404349?action=share&creator=26636754
 
 ### Server Link:
 https://amethyst-coypu-gown.cyclic.app
