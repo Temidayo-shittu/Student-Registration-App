@@ -51,7 +51,7 @@ const updateStudentPassowrd = async(req, res)=>{
     if(!isPasswordCorrect) throw new CustomError.UnauthenticatedError('Invalid Authentication');
     student.password = newPassword;
     await student.save();
-    res.status(StatusCodes.OK).json({message:"Successfully Updated Student Passowrd!!"});
+    res.status(StatusCodes.OK).json({ message:"Successfully Updated Student Passowrd!!" });
     } catch (err) {
         console.log("INTERNAL_SERVER_ERROR:", err.message);
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({

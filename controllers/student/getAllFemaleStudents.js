@@ -1,7 +1,7 @@
 const Student = require('../../models/Student');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
-const{ ApiFeatures } = require('../../utils')
+const{ ApiFeatures } = require('../../utils');
 
 const getAllFemaleStudents = async(req, res)=>{
     const femaleStudentCount = await Student.find({ gender:"female" }).countDocuments();

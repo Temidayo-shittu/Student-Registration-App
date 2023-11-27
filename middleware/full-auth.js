@@ -10,15 +10,11 @@ const authenticateUser = async (req, res, next) => {
   if (authHeader && authHeader.startsWith('Bearer')) {
     token = authHeader.split(' ')[1];
   }
-  
-  // check cookies
-  else if (req.cookies.token) {
-    token = req.cookies.token;
-  }
 
   if (!token) {
     throw new CustomError.UnauthenticatedError('Authentication invalid');
   }
+  
   try {
     const { fullname, userId, role } = isTokenValid(token);
 

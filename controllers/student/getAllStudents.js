@@ -1,7 +1,7 @@
 const Student = require('../../models/Student');
 const { StatusCodes } = require('http-status-codes');
 const CustomError = require('../../errors');
-const{ ApiFeatures } = require('../../utils')
+const{ ApiFeatures } = require('../../utils');
 
 const getAllStudents = async(req,res)=>{
     const totalStudentCount = await Student.countDocuments();
