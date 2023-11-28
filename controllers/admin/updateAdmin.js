@@ -11,7 +11,7 @@ const updateAdmin = async(req, res)=>{
     const admin = await Admin.findOne({_id:req.user.userId});
     if(!admin) throw new CustomError.UnauthenticatedError('Invalid Authentication');
     checkPermissions(req.user, admin._id);
-    console.log(req.user, admin._id, req.user.role, admin.role);
+    
     admin.fullname = fullname;
     admin.email = email;
     await admin.save();
@@ -40,7 +40,7 @@ const updateAdminPassowrd = async(req, res)=>{
     const admin = await Admin.findOne({ _id:req.user.userId });
     if(!admin) throw new CustomError.UnauthenticatedError(`Admin with the given ID: ${req.user.userId} not found`);
     checkPermissions(req.user, admin._id);
-    console.log(req.user, admin._id, req.user.role, admin.role);
+    
     const isPasswordCorrect = await admin.comparePassword(oldPassword);
     if(!isPasswordCorrect) throw new CustomError.UnauthenticatedError('Invalid Authentication');
     admin.password = newPassword;

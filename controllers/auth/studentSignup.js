@@ -18,9 +18,7 @@ const studentSignup = async(req, res)=>{
 
 	await student.save();
     const tokenUser = createTokenStudent(student);
-    console.log(tokenUser);
     const token = createJWT(tokenUser);
-    console.log(token);
     
     res.status(StatusCodes.CREATED).json({ 
         message: `Successfully Registered ${student.fullname} from ${student.department} Department!!`,

@@ -11,7 +11,6 @@ const uploadStudentPhoto = async(req, res)=>{
 
     try {
       const imagesLinks = [];
-      console.log(req.files.file);
 
       if (!req.files.file) throw new CustomError.BadRequestError(`Please at least one student image is required!`); 
   

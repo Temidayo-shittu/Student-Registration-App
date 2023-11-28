@@ -41,12 +41,12 @@ const updateStudent = async(req, res)=>{
 const updateStudentPassowrd = async(req, res)=>{
     const { oldPassword, newPassword } = req.body;
     if(!oldPassword || !newPassword) throw new CustomError.BadRequestError('please provide both passwords');
+    
     try {
     const student = await Student.findOne({_id:req.user.userId});
-    console.log(req.user.userId);
     if(!student) throw new CustomError.UnauthenticatedError(`Student with the given ID: ${req.user.userId} not found`);
     checkPermissions(req.user, student._id);
-    console.log(req.user, student._id, req.user.role, student.role);
+    
     const isPasswordCorrect = await student.comparePassword(oldPassword);
     if(!isPasswordCorrect) throw new CustomError.UnauthenticatedError('Invalid Authentication');
     student.password = newPassword;

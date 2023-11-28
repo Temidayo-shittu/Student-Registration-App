@@ -4,7 +4,6 @@ const studentAge = (birthYear)=>{
     const today = new Date();
     const birthDate = new Date(birthYear);
     let age = today.getFullYear() - birthDate.getFullYear();
-    console.log(birthDate,age)
     const monthDiff = today.getMonth() - birthDate.getMonth();
 
     if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {

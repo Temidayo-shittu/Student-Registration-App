@@ -10,7 +10,6 @@ const getSingleStudentPhoto = async(req, res)=>{
     const { id:studentPhotoId } = req.params;
     const studentPhoto = await StudentPhoto.findOne({ _id:studentPhotoId }).populate({path:'student', select:'fullname faculty department current_level matric_number'});
     if(!studentPhoto) throw new CustomError.NotFoundError(`StudentPhoto with the given ID: ${studentPhotoId} not found`);
-    console.log(req.user, studentPhoto.student._id)
     checkPermissions(req.user, studentPhoto.student._id);
     res.status(StatusCodes.OK).json({studentPhoto, count:studentPhoto.length});  
 };
