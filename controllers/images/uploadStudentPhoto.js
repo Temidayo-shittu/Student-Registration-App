@@ -58,7 +58,7 @@ const uploadStudentPhoto = async(req, res)=>{
 		});
 
 } catch (err) {
-    console.log("INTERNAL_SERVER_ERROR:", err.message);
+    console.log("INTERNAL_SERVER_ERROR:", err);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
         status: "fail",
         message: "Internal server error",

@@ -51,6 +51,7 @@ app.use(xss());
 app.use(mongoSanitize());
 
 app.use(express.json());
+cloudinaryConfig(); 
 
 app.use(fileUpload({ 
     useTempFiles: true,
@@ -84,10 +85,12 @@ const port = process.env.PORT || 5000
 
 const start = async()=>{
     try {
-        await connectDB(process.env.MONGO_URL)
-        app.listen(port, console.log(`Listening on port ${port}`))
-    } catch (error) {app.listen(port, console.log(`Listening on port ${port}`))
-        console.log(error)
-    }
-}
+        await connectDB(process.env.MONGO_URL);
+        app.listen(port, console.log(`Listening on port ${port}`));
+    } catch (error) {
+        app.listen(port, console.log(`Listening on port ${port}`));
+        console.log(error);
+    };
+};
+
 start();
