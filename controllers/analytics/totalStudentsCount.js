@@ -15,7 +15,7 @@ const totalStudentsCounts = async (req, res) => {
 
         return res.status(StatusCodes.OK).json({
 			status: "success",
-			totalStudentsCount: result[0].totalStudentsCount,
+			totalStudentsCount: result[0]?.totalStudentsCount || 0,
 		});
         
     } catch (err) {

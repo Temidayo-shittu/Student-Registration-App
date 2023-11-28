@@ -20,7 +20,7 @@ const getFemaleStudentsCounts = async (req, res) => {
 
         return res.status(StatusCodes.OK).json({
 			status: "success",
-			femaleCount: result[0].femaleCount,
+			femaleCount: result[0]?.femaleCount || 0,
 		});
         
     } catch (err) {
