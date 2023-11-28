@@ -61,7 +61,7 @@ const numOfStudentsInEachFaculty = async (req, res) => {
                     result.Pharmacy = count.studentsCount;
                     break;
                 case "Sciences":
-                    result.EnvironmentalSciences = count.studentsCount;
+                    result.Sciences = count.studentsCount;
                     break;
                 case "Social Sciences":
                     result.SocialSciences = count.studentsCount;
