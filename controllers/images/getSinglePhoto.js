@@ -17,7 +17,7 @@ const getSingleStudentPhoto = async(req, res)=>{
 
 const showCurrentStudentPhoto = async(req, res)=>{
     const studentPhoto = await StudentPhoto.findOne({ student:req.user.userId }).populate({path:'student', select:'fullname faculty department current_level matric_number'});
-    if(!studentPhoto) throw new CustomError.NotFoundError(`Student with the given ID: ${req.user.userId} not found`);
+    if(!studentPhoto) throw new CustomError.NotFoundError(`Student with the given ID: ${req.user.userId} is yet to upload his profile photo`);
     res.status(StatusCodes.OK).json({ studentPhoto });
 }
 
