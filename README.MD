@@ -1,6 +1,6 @@
 ## Hosted Project
 
-[Student-Registration App Cyclic URL](https://amethyst-coypu-gown.cyclic.app)
+[Student-Registration App Cyclic URL](https://amethyst-coypu-gown.cyclic.app/api/v1)
 
 #### Setup Basic Express Server
 
@@ -9,14 +9,15 @@
 ## User Story
 
 - As a student, I should be able to register or signup and retrieve information concerning myself. 
-- Students can register or login to their account and are able to view the contents of their details. 
-- Only registered students can upload their images which will be stored in the cloud and can be accessed by themselves and admin.
+- Students can register or login to their account and are able to view their details. 
+- Only registered students can upload their images which will be stored in the cloud and can be accessed by themselves and admin/super-admin.
 - Students can only access information pertaining to themselves as they wont be able to access information concerning other students.
 - Admins and super-admin can sign up and login to their accounts.
-- Only Admins can get information about all students and other sensitive statistics concerning the students.
+- Only Admin/Super-Admin can get information about all students and other sensitive statistics concerning the students.
 - Only super-admin can delete an admin or students profile. 
+- Super Admin can execute all functions of an admin.
 - I created a checkPermissions function which limits the access of students' resources by anyone except the owner of the resource or admin/super-admin.
-- Once a student, admin/super-admin is logged out, their tokens gets saved in the Blacklisted Tokens which prevents them from accessing routes unless they are logged in again.reate
+- Once a student, admin/super-admin is logged out, their tokens gets saved in the Blacklisted Tokens which prevents them from accessing other routes unless they login afresh.
 
 ## Requirement Analysis
 
@@ -34,5 +35,5 @@
 https://www.postman.com/galactic-resonance-793427/workspace/babban-gona-hackathon/collection/26636754-1a805b8c-845a-4776-a9fd-1ca256404349?action=share&creator=26636754
 
 ### Server Link:
-https://amethyst-coypu-gown.cyclic.app
+https://amethyst-coypu-gown.cyclic.app/api/v1
 

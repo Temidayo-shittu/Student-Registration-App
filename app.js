@@ -11,7 +11,6 @@ const { config } = require("./config/global.config");
 
 //Rest of packages
 const morgan = require('morgan');
-const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const rateLimiter = require('express-rate-limit');
 const helmet = require('helmet');
@@ -37,7 +36,6 @@ const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
 
 
-app.use(morgan('tiny'));
 app.set('trust proxy',1);
 
 app.use(rateLimiter({
@@ -63,7 +61,7 @@ app.use(fileUpload({
 app.get("/", (req, res) => res.send("API is up and running"));
 app.get("/api/v1", (req, res) => {
     res.json({
-        message:"Student-Registration Portal API V1, [Health check::: API up and running]",
+        message:"Student-Registration Portal API, [Health check::: API up and running]",
         postmanLink: "https://www.postman.com/galactic-resonance-793427/workspace/babban-gona-hackathon/collection/26636754-1a805b8c-845a-4776-a9fd-1ca256404349?action=share&creator=26636754"
     })
 });
@@ -81,7 +79,7 @@ app.use(`${config.api.prefix}/super-admin`, superAdminRouter);
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5000;
 
 const start = async()=>{
     try {
