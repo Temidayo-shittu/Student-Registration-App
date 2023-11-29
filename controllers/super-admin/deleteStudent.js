@@ -7,8 +7,9 @@ const deleteStudent = async(req, res)=>{
     const { id:studentId } = req.params;
     const student = await Student.findOne({ _id:studentId });
     if(!student) throw new CustomError.NotFoundError(`Student with the given ID: ${studentId} not found`);
+    const studentName = student.fullname;
     await student.remove();
-    res.status(StatusCodes.OK).json({ message:'Student has been Succesfully Deleted!!' });
+    res.status(StatusCodes.OK).json({ message: `Succesfully Deleted Student: ${studentName}!!` });
     } catch (err) {
         console.log("INTERNAL_SERVER_ERROR:", err.message);
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
