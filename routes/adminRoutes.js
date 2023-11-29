@@ -8,7 +8,7 @@ const adminRouter = Router();
 
 // Admin level routes
 adminRouter.route("/").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], getAdmin);
-studentRouter.route("/show/AllMyDetails").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], showCurrentAdmin);
+adminRouter.route("/show/AllMyDetails").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], showCurrentAdmin);
 adminRouter.route("/updateAdmin").patch(authenticateUser, checkBlacklist, updateAdmin);
 adminRouter.route("/updateAdminPassword").patch(authenticateUser, checkBlacklist, updateAdminPassowrd);
 
