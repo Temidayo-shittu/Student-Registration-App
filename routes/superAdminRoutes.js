@@ -10,7 +10,7 @@ const superAdminRouter = Router();
 
 // Super-Admin level routes
 superAdminRouter.route("/admin-signup").post([authenticateUser, checkBlacklist, authorizeRoles('super-admin')], adminSignup);
-superAdminRouter.route("/details").get([authenticateUser, checkBlacklist, authorizeRoles('super-admin')], getSuperAdmin);
+superAdminRouter.route("/").get([authenticateUser, checkBlacklist, authorizeRoles('super-admin')], getSuperAdmin);
 superAdminRouter.route("/admin/:id").delete([authenticateUser, checkBlacklist, authorizeRoles('super-admin')], deleteAdmin);
 superAdminRouter.route("/student/:id").delete([authenticateUser, checkBlacklist, authorizeRoles('super-admin')], deleteStudent);
 
