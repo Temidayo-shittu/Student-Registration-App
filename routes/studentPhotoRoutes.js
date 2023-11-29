@@ -15,7 +15,7 @@ studentPhotoRouter.route("/all-images").get([authenticateUser, checkBlacklist, a
 // Student level routes
 studentPhotoRouter.route("/uploads").post(authenticateUser, checkBlacklist, uploadStudentPhoto);
 studentPhotoRouter.route("/:id").get(authenticateUser, checkBlacklist, getSingleStudentPhoto);
-studentPhotoRouter.route("/show-photo").get(authenticateUser, checkBlacklist, showCurrentStudentPhoto);
+studentPhotoRouter.route("/show/photo").get(authenticateUser, checkBlacklist, showCurrentStudentPhoto);
 
 
 module.exports = { studentPhotoRouter };
