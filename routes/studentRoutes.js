@@ -10,14 +10,14 @@ const { authenticateUser, checkBlacklist, authorizeRoles }= require('../middlewa
 const studentRouter = Router();
 
 // Admin level routes
-studentRouter.route("/fetch/all").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], getAllStudents);
-studentRouter.route("/fetch/all/male").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], getAllMaleStudents);
-studentRouter.route("/fetch/all/female").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], getAllFemaleStudents);
+studentRouter.route("/all").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], getAllStudents);
+studentRouter.route("/male").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], getAllMaleStudents);
+studentRouter.route("/female").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], getAllFemaleStudents);
 
 // Student level routes
 studentRouter.route("/:id").get(authenticateUser, checkBlacklist, getSingleStudent);
-studentRouter.route("/show/AllMyDetails").get(authenticateUser, checkBlacklist, showCurrentStudent);
+studentRouter.route("/show-details").get(authenticateUser, checkBlacklist, showCurrentStudent);
 studentRouter.route("/:id").patch(authenticateUser, checkBlacklist, updateStudent);
-studentRouter.route("/update/StudentPassword").patch(authenticateUser, checkBlacklist, updateStudentPassowrd);
+studentRouter.route("/student-password").patch(authenticateUser, checkBlacklist, updateStudentPassowrd);
 
 module.exports = { studentRouter };

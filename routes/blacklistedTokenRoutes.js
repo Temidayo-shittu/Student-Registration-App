@@ -6,6 +6,6 @@ const { authenticateUser, checkBlacklist, authorizeRoles }= require('../middlewa
 const blackListedTokenRouter = Router();
 
 // Admin level routes
-blackListedTokenRouter.route("/fetch/all").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], getallBlacklistedTokens);
+blackListedTokenRouter.route("/all").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], getallBlacklistedTokens);
 
 module.exports = { blackListedTokenRouter };

@@ -15,14 +15,14 @@ const { authenticateUser, checkBlacklist, authorizeRoles } = require('../middlew
 const analyticsRouter = Router();
 
 // Admin level routes
-analyticsRouter.route("/fetch/all/male-count").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], getMaleStudentsCounts);
-analyticsRouter.route("/fetch/all/female-count").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], getFemaleStudentsCounts);
-analyticsRouter.route("/fetch/all/students-count").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], totalStudentsCounts);
-analyticsRouter.route("/fetch/all/nigerian-students-count").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], totalNigerianStudentsCounts);
-analyticsRouter.route("/fetch/all/foreign-students-count").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], totalForeignStudentsCounts);
-analyticsRouter.route("/fetch/all/average-age").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], averageStudentsAge);
-analyticsRouter.route("/fetch/all/students-level").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], numOfStudentsInEachLevel);
-analyticsRouter.route("/fetch/all/students-faculty").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], numOfStudentsInEachFaculty);
+analyticsRouter.route("/male-count").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], getMaleStudentsCounts);
+analyticsRouter.route("/female-count").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], getFemaleStudentsCounts);
+analyticsRouter.route("/students-count").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], totalStudentsCounts);
+analyticsRouter.route("/nigerian-students-count").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], totalNigerianStudentsCounts);
+analyticsRouter.route("/foreign-students-count").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], totalForeignStudentsCounts);
+analyticsRouter.route("/average-age").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], averageStudentsAge);
+analyticsRouter.route("/students-level").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], numOfStudentsInEachLevel);
+analyticsRouter.route("/students-faculty").get([authenticateUser, checkBlacklist, authorizeRoles('admin','super-admin')], numOfStudentsInEachFaculty);
 
 
 module.exports = { analyticsRouter };

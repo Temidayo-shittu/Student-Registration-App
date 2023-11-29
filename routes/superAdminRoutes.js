@@ -10,8 +10,8 @@ const superAdminRouter = Router();
 
 // Super-Admin level routes
 superAdminRouter.route("/admin-signup").post([authenticateUser, checkBlacklist, authorizeRoles('super-admin')], adminSignup);
-superAdminRouter.route("/getDetails").get([authenticateUser, checkBlacklist, authorizeRoles('super-admin')], getSuperAdmin);
-superAdminRouter.route("/delete-admin/:id").delete([authenticateUser, checkBlacklist, authorizeRoles('super-admin')], deleteAdmin);
-superAdminRouter.route("/delete-student/:id").delete([authenticateUser, checkBlacklist, authorizeRoles('super-admin')], deleteStudent);
+superAdminRouter.route("/details").get([authenticateUser, checkBlacklist, authorizeRoles('super-admin')], getSuperAdmin);
+superAdminRouter.route("/admin/:id").delete([authenticateUser, checkBlacklist, authorizeRoles('super-admin')], deleteAdmin);
+superAdminRouter.route("/student/:id").delete([authenticateUser, checkBlacklist, authorizeRoles('super-admin')], deleteStudent);
 
 module.exports = { superAdminRouter };
