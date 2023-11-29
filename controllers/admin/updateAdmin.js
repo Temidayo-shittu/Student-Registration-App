@@ -10,7 +10,6 @@ const updateAdmin = async(req, res)=>{
     if(!fullname || !email) throw new CustomError.BadRequestError('please provide full-name and email');
     const admin = await Admin.findOne({_id:req.user.userId});
     if(!admin) throw new CustomError.UnauthenticatedError('Invalid Authentication');
-    console.log(req.user, req.user.userId, admin._id)
     checkPermissions(req.user, admin._id);
     
     admin.fullname = fullname;
@@ -40,7 +39,6 @@ const updateAdminPassowrd = async(req, res)=>{
     if(!oldPassword || !newPassword) throw new CustomError.BadRequestError('please provide both passwords');
     const admin = await Admin.findOne({ _id:req.user.userId });
     if(!admin) throw new CustomError.UnauthenticatedError(`Admin with the given ID: ${req.user.userId} not found`);
-    console.log(req.user, req.user.userId, admin._id)
     checkPermissions(req.user, admin._id);
     
     const isPasswordCorrect = await admin.comparePassword(oldPassword);
