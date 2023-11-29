@@ -12,7 +12,7 @@ const authenticateUser = async (req, res, next) => {
   }
 
   if (!token) {
-    throw new CustomError.UnauthenticatedError('Authentication invalid');
+    throw new CustomError.UnauthenticatedError('Authentication invalid!! Please Login Afresh');
   }
   
   try {

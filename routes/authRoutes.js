@@ -1,6 +1,5 @@
 const { Router } = require("express");
 
-const { adminSignup } = require("../controllers/auth/adminSignup");
 const { studentSignup } = require("../controllers/auth/studentSignup");
 const { adminLogin } = require("../controllers/auth/adminLogin");
 const { studentLogin } = require("../controllers/auth/studentLogin");
@@ -11,7 +10,6 @@ const { studentLogout } = require("../controllers/auth/studentLogout");
 const authRouter = Router();
 
 // Admin level routes
-authRouter.route("/admin/signup").post(adminSignup);
 authRouter.route("/student/signup").post(studentSignup);
 authRouter.route("/admin/login").post(adminLogin);
 authRouter.route("/student/login").post(studentLogin);

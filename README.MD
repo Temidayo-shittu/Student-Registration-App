@@ -12,7 +12,8 @@
 - Students can register or login to their account and are able to view their details. 
 - Only registered students can upload their images which will be stored in the cloud and can be accessed by themselves and admin/super-admin.
 - Students can only access information pertaining to themselves as they wont be able to access information concerning other students.
-- Admins and super-admin can sign up and login to their accounts.
+- Only a super-admin can create an admin. 
+- An admin can update his/her details and also login to their account.
 - Only Admin/Super-Admin can get information about all students and other sensitive statistics concerning the students.
 - Only super-admin can delete an admin or students profile. 
 - Super Admin can execute all functions of an admin.
