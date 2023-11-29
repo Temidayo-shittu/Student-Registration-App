@@ -18,6 +18,6 @@ studentRouter.route("/female").get([authenticateUser, checkBlacklist, authorizeR
 studentRouter.route("/:id").get(authenticateUser, checkBlacklist, getSingleStudent);
 studentRouter.route("/").get(authenticateUser, checkBlacklist, showCurrentStudent);
 studentRouter.route("/:id").patch(authenticateUser, checkBlacklist, updateStudent);
-studentRouter.route("/student-password").patch(authenticateUser, checkBlacklist, updateStudentPassowrd);
+studentRouter.route("/edit/student-password").patch(authenticateUser, checkBlacklist, updateStudentPassowrd);
 
 module.exports = { studentRouter };
